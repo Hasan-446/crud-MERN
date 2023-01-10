@@ -4,7 +4,10 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
+import DeleteIcon from "@mui/icons-material/Delete";
+import UpdateIcon from "@mui/icons-material/Update";
 import TableHead from "@mui/material/TableHead";
+import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
@@ -16,7 +19,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 13,
+    fontSize: 12,
   },
 }));
 
@@ -47,7 +50,7 @@ export default function AllUser() {
   return (
     <TableContainer component={Paper}>
       <Table
-        sx={{ maxWidth: 900, margin: "auto", marginTop: "10px" }}
+        sx={{ maxWidth: 1000, margin: "auto", marginTop: "10px" }}
         aria-label="customized table"
       >
         <TableHead>
@@ -57,6 +60,7 @@ export default function AllUser() {
             <StyledTableCell align="left">Username</StyledTableCell>
             <StyledTableCell align="left">Email</StyledTableCell>
             <StyledTableCell align="left">Phone</StyledTableCell>
+            <StyledTableCell align="left">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -69,6 +73,25 @@ export default function AllUser() {
               <StyledTableCell align="left">{user.username} </StyledTableCell>
               <StyledTableCell align="left">{user.email} </StyledTableCell>
               <StyledTableCell align="left">{user.phone} </StyledTableCell>
+              <StyledTableCell>
+                <Button
+                  variant="contained"
+                  color="error"
+                  style={{ marginRight: 10 }}
+                  endIcon={<DeleteIcon />}
+                  size="small"
+                >
+                  Delete
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  endIcon={<UpdateIcon />}
+                  size="small"
+                >
+                  Update
+                </Button>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

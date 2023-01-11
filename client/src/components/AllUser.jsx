@@ -43,7 +43,8 @@ export default function AllUser() {
   };
 
   const deleteUser = async (id) => {
-    await deleteUserInfo();
+    await deleteUserInfo(id);
+    getAllUser();
   };
 
   useEffect(() => {

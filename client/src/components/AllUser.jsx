@@ -10,10 +10,9 @@ import TableHead from "@mui/material/TableHead";
 import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { GetUser } from "../service/Api.js";
-
+import { GetUser, deleteUserInfo } from "../service/Api.js";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -37,11 +36,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function AllUser() {
   const [users, setUsers] = useState([]);
-  const navigate = useNavigate();
 
   const getAllUser = async () => {
     let response = await GetUser();
     setUsers(response.data);
+  };
+
+  const deleteUser = async (id) => {
+    await deleteUserInfo();
   };
 
   useEffect(() => {
@@ -49,10 +51,6 @@ export default function AllUser() {
   }, []);
 
   console.log(users);
-
-  const handleClick=()=>{
-     navigate('/update')
-  }
 
   return (
     <TableContainer component={Paper}>
@@ -87,6 +85,7 @@ export default function AllUser() {
                   style={{ marginRight: 10 }}
                   endIcon={<DeleteIcon />}
                   size="small"
+                  onClick={() => deleteUser(user._id)}
                 >
                   Delete
                 </Button>
@@ -95,7 +94,8 @@ export default function AllUser() {
                   color="primary"
                   endIcon={<UpdateIcon />}
                   size="small"
-                  onClick={handleClick}
+                  component={Link}
+                  to={`/update/${user._id}`}
                 >
                   Update
                 </Button>

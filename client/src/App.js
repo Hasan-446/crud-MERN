@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/all" element={<AllUser />}></Route>
           <Route path="/add" element={<AddUser />}></Route>
-          <Route path="/update" element={<AddedUser />}></Route>
+          <Route path="/update/:id" element={<AddedUser />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
